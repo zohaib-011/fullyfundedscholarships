@@ -24,7 +24,7 @@ const popularScholarships = [
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function GET(req: NextRequest) {
-  return NextResponse.json(popularScholarships, { status: 200 });
+  return NextResponse.json({message:popularScholarships}, { status: 200 });
 }
 
 export async function POST(req: NextRequest) {
