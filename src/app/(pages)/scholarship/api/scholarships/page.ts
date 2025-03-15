@@ -24,14 +24,14 @@ const scholarships = [
 ];
 
 // ✅ Fix: Use `_req` to indicate an unused parameter
-export async function GET(_req: NextRequest) {
+export async function GET() {
   return NextResponse.json(scholarships, { status: 200 });
 }
 
 // ✅ Fix: Create a new array instead of mutating the original `const` array
 export async function POST(req: NextRequest) {
   const newScholarship = await req.json();
-  const updatedScholarships = [...scholarships, newScholarship]; // Create a new array
+  // const updatedScholarships = [...scholarships, newScholarship]; // Create a new array
 
   return NextResponse.json(
     { message: "Scholarship added successfully", data: newScholarship },

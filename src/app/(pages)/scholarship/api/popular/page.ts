@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
     newScholarship.id = popularScholarships.length + 1;
 
     // ✅ Use `.concat()` instead of `.push()` to create a new array
-    const updatedScholarships = [...popularScholarships, newScholarship];
+    // const updatedScholarships = [...popularScholarships, newScholarship];
 
     return NextResponse.json(
       { message: "Scholarship added successfully", data: newScholarship },
