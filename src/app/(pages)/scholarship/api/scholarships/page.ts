@@ -1,0 +1,36 @@
+import { NextRequest, NextResponse } from 'next/server';
+
+// Sample scholarship data
+let scholarships = [
+  {
+    title: "Erasmus Mundus IMAPP Scholarships 2025-26 (Fully Funded)",
+    heading: {
+      title: "Erasmus Mundus IMAPP Scholarships 2025-26 for International Students",
+      description:
+        "Applications are invited to apply for the Erasmus Mundus IMAPP Scholarships 2025-26. All international students are eligible to apply for the Erasmus IMAPP Scholarship. Candidates who want to study in France, Germany, and Italy on a Fully Funded Scholarship are encouraged to apply. The scholarships are available to pursue a fully funded Masters Degree. These scholarships are available for academic session of 2025-2026. Also apply for the International Graduate Scholarship 2025 in Japan (Fully Funded). Online education",
+    },
+    table: {
+      title: "Erasmus Mundus IMAPP Scholarships 2025 Details:",
+      details: [
+        { title: "Offered by", description: "European Union" },
+        { title: "Degree level", description: "Masters" },
+        { title: "Scholarship coverage", description: "Fully Funded" },
+        { title: "Eligible nationality", description: "All Nationalities" },
+        { title: "Award country", description: "France, Germany, and Italy" },
+        { title: "Last Date", description: "16 March 2025" },
+      ],
+    },
+  },
+];
+
+// GET method to fetch scholarships
+export async function GET(req: NextRequest) {
+  return NextResponse.json(scholarships, { status: 200 });
+}
+
+// POST method to add a new scholarship
+export async function POST(req: NextRequest) {
+  const newScholarship = await req.json();
+  scholarships.push(newScholarship);
+  return NextResponse.json({ message: "Scholarship added successfully" }, { status: 201 });
+}
