@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-// Sample scholarship data
-let scholarships = [
+// ✅ Use `const` instead of `let` because `scholarships` is not reassigned
+const scholarships = [
   {
     title: "Erasmus Mundus IMAPP Scholarships 2025-26 (Fully Funded)",
     heading: {
@@ -23,14 +23,18 @@ let scholarships = [
   },
 ];
 
-// GET method to fetch scholarships
-export async function GET(req: NextRequest) {
+// ✅ Fix: Use `_req` to indicate an unused parameter
+export async function GET(_req: NextRequest) {
   return NextResponse.json(scholarships, { status: 200 });
 }
 
-// POST method to add a new scholarship
+// ✅ Fix: Create a new array instead of mutating the original `const` array
 export async function POST(req: NextRequest) {
   const newScholarship = await req.json();
-  scholarships.push(newScholarship);
-  return NextResponse.json({ message: "Scholarship added successfully" }, { status: 201 });
+  const updatedScholarships = [...scholarships, newScholarship]; // Create a new array
+
+  return NextResponse.json(
+    { message: "Scholarship added successfully", data: newScholarship },
+    { status: 201 }
+  );
 }

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-// Use `let` because we're modifying the array (pushing new items)
-let popularScholarships = [
+// ✅ Use `const` since the array reference itself is not reassigned
+const popularScholarships = [
   {
     id: 1,
     title: "Young Professional Fellowship 2025 in Canada (Fully Funded)",
@@ -22,7 +22,6 @@ let popularScholarships = [
   },
 ];
 
-// ✅ Fix: Ignoring ESLint rule for unused `req` parameter
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function GET(req: NextRequest) {
   return NextResponse.json(popularScholarships, { status: 200 });
@@ -32,14 +31,16 @@ export async function POST(req: NextRequest) {
   try {
     const newScholarship = await req.json();
     newScholarship.id = popularScholarships.length + 1;
-    popularScholarships.push(newScholarship);
+
+    // ✅ Use `.concat()` instead of `.push()` to create a new array
+    const updatedScholarships = [...popularScholarships, newScholarship];
 
     return NextResponse.json(
       { message: "Scholarship added successfully", data: newScholarship },
       { status: 201 }
     );
   } catch (error) {
-    console.error("POST error:", error); // ✅ Log the error to avoid ESLint issues
+    console.error("POST error:", error);
     return NextResponse.json({ message: "Error adding scholarship" }, { status: 500 });
   }
 }
