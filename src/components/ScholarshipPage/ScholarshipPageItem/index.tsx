@@ -29,7 +29,8 @@ const ScholarshipPageItem: React.FC = () => {
           <h2 className="text-2xl font-bold text-white bg-blue-600 p-3 rounded-md text-center">
             {scholarship.title}
           </h2>
-          <p className="mt-3 text-gray-700">{scholarship.description}</p>
+          {/* Render bold tags properly */}
+          <p className="mt-3 text-gray-700" dangerouslySetInnerHTML={{ __html: scholarship.description }}></p>
           <ul className="list-disc mt-4 pl-5 text-gray-700">
             {scholarship.points.map((point, i) => (
               <li key={i}>{point}</li>
