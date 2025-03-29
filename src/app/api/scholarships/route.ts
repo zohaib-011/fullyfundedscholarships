@@ -1,3 +1,4 @@
+
 import { NextRequest, NextResponse } from 'next/server';
 
 // ✅ Use `const` instead of `let` because `scholarships` is not reassigned
